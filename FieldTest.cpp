@@ -35,3 +35,14 @@ TEST(FieldTest, checkMinBounds)
     ASSERT_FALSE(minefield.isSafe(-1,-1));
 }
 
+TEST(FieldTest, checkRAsafe)
+{
+    Field minefield;
+    minefield.placeMine(5,5);
+    minefield.revealAdjacent(4,5);
+    ASSERT_EQ(EMPTY_SHOWN|EMPTY_HIDDEN , minefield.get(4,5));
+    ASSERT_EQ(EMPTY_SHOWN|EMPTY_HIDDEN , minefield.get(3,5));
+    ASSERT_EQ(EMPTY_SHOWN|EMPTY_HIDDEN , minefield.get(4,4));
+    ASSERT_EQ(EMPTY_SHOWN|EMPTY_HIDDEN , minefield.get(4,6));
+    ASSERT_EQ(MINE_HIDDEN|EMPTY_HIDDEN , minefield.get(5,5));
+}
